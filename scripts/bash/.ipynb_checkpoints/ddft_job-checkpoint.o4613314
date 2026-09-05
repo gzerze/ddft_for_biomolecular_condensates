@@ -1,0 +1,48 @@
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:126: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f1 = sci.quad(self.fel_toint1, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:126: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f1 = sci.quad(self.fel_toint1, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:126: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f1 = sci.quad(self.fel_toint1, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:126: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f1 = sci.quad(self.fel_toint1, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:126: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f1 = sci.quad(self.fel_toint1, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:126: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f1 = sci.quad(self.fel_toint1, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:126: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f1 = sci.quad(self.fel_toint1, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:126: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f1 = sci.quad(self.fel_toint1, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:127: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f2 = sci.quad(self.fel_toint2, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:127: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f2 = sci.quad(self.fel_toint2, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:127: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f2 = sci.quad(self.fel_toint2, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:127: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f2 = sci.quad(self.fel_toint2, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:127: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f2 = sci.quad(self.fel_toint2, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:127: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f2 = sci.quad(self.fel_toint2, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:127: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f2 = sci.quad(self.fel_toint2, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+
+WARNING:py.warnings:/project/zerze/morganmurray/software/RPA_ddft3_2/scripts/DDFT/Protein_RPA/utils/free_energy.py:127: IntegrationWarning: The integral is probably divergent, or slowly convergent.
+  f2 = sci.quad(self.fel_toint2, 0, np.inf, args=(phi,phis,u), limit=self.intlim)[0]
+

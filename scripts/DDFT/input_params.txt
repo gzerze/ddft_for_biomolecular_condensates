@@ -1,0 +1,70 @@
+#   Initialization parameters
+
+#   Flag/variable simulation parameters with conditions
+#   plot_flag is for generating images (PNG  format)
+dimension,2
+plot_flag,1
+svg_flag,1
+circ_flag,0
+
+
+#   salt concentration
+#   Define size of grid (nx=number of cells per dimension), dx = length of cell
+nx,120
+ny,120
+nz,1
+dx,2.4
+
+phis,0.000
+
+#   Noise strength (will be deleted)
+noise_strength,0.0
+
+#   Simulation parameters
+#   dt is initial step size
+#   dt_max & min are maximum/minimum step sizes that are allowed
+#   tolerance is the residual below which simulation stops
+#   total_steps/duration are number of simulation steps/time to run (whichever occurs first)
+#   checkpoint is frequency of logging simulation data
+dt,1e-2
+dt_max,5e2
+dt_min,1e-5
+tolerance,1e-6
+total_steps,10000
+text_log,100
+checkpoint,100
+duration,200000.0
+state_save,100
+seq_name1,Ddx4_N1
+seq_name2,FUS_FC
+charge, 1
+
+# Surface tension / influence parameter
+kappa,161
+temperature_inverse,4
+pH,7
+
+#    Florry Huggins Parameters
+enthalpy1,-0.07
+entropy1,-0.3
+enthalpy2,0.1
+entropy2,-0.35
+
+#   Number of components
+no_comps,1
+
+#     Boundary Condition
+phi_boundary,4.15950341392144e-07
+boundary_type,zero_flux
+#diffusive constant at boundary
+h_mul,0.0
+
+#   Dense/Dilute IC Values
+idense,0.1499
+idil,0.00002687
+
+#     Frequency of capturing image
+n_capture,100
+
+# Initial density profile (please refer to density_class.py)
+initial_density,phi_circle2_7

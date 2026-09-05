@@ -1,0 +1,95 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Modules that are used to define the:
+
+
+1.  Free Energy of protein in the presence of counterions, water, and salt
+    This energy includes three terms:
+    a. Entropy term
+    b. Electrostatic energy
+    c. Flory Huggins energy
+    
+"""
+
+import numpy as np
+
+
+class free_energy():
+    """
+
+    """
+    def __init__(self,c_alpha,c_beta,rho_s,chi,kappa):
+        self.c_alpha = c_alpha;
+        self.c_beta = c_beta;
+        self.rho_s = rho_s;
+        self.chi = chi;
+        self.kappa = kappa;
+    # homogeneous bulk free energy
+
+
+
+
+
+
+
+
+
+    def f_0(self,phi_p,phi_r):
+        return self.rho_s * (phi_p - self.c_alpha)**2 * (self.c_beta-phi_p)**2 + self.chi * phi_p * phi_r
+
+    # free energy
+    def f(self,phi_p,phi_r):
+        return self.f_0(phi_p,phi_r)+ .5*self.kappa*(phi_p.grad.mag)**2
+
+    # chemical potential
+    def mu_p(self,phi_p,phi_r):
+        return 2* self.rho_s * (self.c_alpha-phi_p) * (self.c_beta-phi_p) * (self.c_alpha + self.c_beta - 2*phi_p) +self.chi * phi_r
+
+    # first derivative of chemical potential
+    def dmu_p_dphi_p(self,phi_p,phi_r):
+        return 2 * self.rho_s * ((self.c_alpha - phi_p)**2 + 4*(self.c_alpha - phi_p)*(self.c_beta - phi_p) + (self.c_beta - phi_p)**2)
+
+    def dmu_p_dphi_r(self,phi_p,phi_r):
+        return self.chi;
+
+class free_energy_FH():
+    """
+    Simple Flory-Huggins free-energy with constant chi - provided for backwards compatibility
+
+    Use free_energy_FH_changing_chi_LG with a=0 (same result)
+    """
+    def __init__(self,c_alpha,c_beta,rho_s,chi,kappa):
+        self.c_alpha = c_alpha;
+        self.c_beta = c_beta;
+        self.rho_s = rho_s;
+        self.chi_pr = chi;
+        self.kappa = kappa;
+        self.chi_ps = np.log(c_beta/(1-c_beta))/(2*c_beta-1);
+        self.chi_rs = 0;
+        print(self.chi_ps)
+
+    # homogeneous bulk free energy
+    def f_0(self,phi_p,phi_r):
+        return (phi_p)*np.log(phi_p) + phi_r*np.log(phi_r) + (1-phi_p-phi_r)*np.log((1-phi_p-phi_r)) + self.chi_pr*phi_p*phi_r + self.chi_ps*phi_p*(1-phi_p-phi_r) + self.chi_rs*phi_r*(1-phi_p-phi_r)
+
+    # free energy
+    def f(self,phi_p,phi_r):
+        return self.f_0(phi_p,phi_r)+ .5*self.kappa*(phi_p.grad.mag)**2
+
+    # chemical potential
+    def mu_p(self,phi_p,phi_r):
+        return (np.log(phi_p/(1-phi_p-phi_r)) + self.chi_pr*phi_r + self.chi_ps*(1-2*phi_p-phi_r) - self.chi_rs*phi_r)
+
+    def mu_r(self,phi_p,phi_r):
+        return (np.log(phi_r/(1-phi_p-phi_r)) + self.chi_pr*phi_p + self.chi_rs*(1-2*phi_r-phi_p) -self.chi_ps*phi_p)
+
+    # first derivative of chemical potential
+    def dmu_p_dphi_p(self,phi_p,phi_r):
+        return (1/phi_p + 1/(1-phi_p-phi_r) - 2*self.chi_ps)
+
+    def dmu_p_dphi_r(self,phi_p,phi_r):
+        return (1/(1-phi_p-phi_r) + self.chi_pr  - self.chi_ps -self.chi_rs);
+
+    def dmu_r_dphi_r(self,phi_p,phi_r):
+        return (1/phi_r + 1/(1-phi_p-phi_r)  - 2*self.chi_rs)
