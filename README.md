@@ -132,7 +132,7 @@ A 2D calculation produces:
 - `scripts/DDFT/Protein_RPA/`: sequence-dependent RPA+FH free-energy routines.
 - `scripts/bash/`: example HPC/SLURM launch scripts.
 
-## Attribution and citation
+## Code Provenance
 
 The RPA-related routines in `scripts/DDFT/Protein_RPA/` were adapted from
 [Protein_RPA](https://github.com/laphysique/Protein_RPA), developed by Yi-Hsuan
