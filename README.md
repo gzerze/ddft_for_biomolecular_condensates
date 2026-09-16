@@ -139,7 +139,8 @@ The RPA-related routines in `scripts/DDFT/Protein_RPA/` were adapted from
 Lin and Hue Sun Chan under the MIT License. 
 Y.-H. Lin, J. D. Forman-Kay, and H. S. Chan, Phys. Rev. Lett. 117, 178101 (2016)
 
-The biomolecular condensate movie-generation workflow was adapted from the methodology provided in [Droplet_analysis](https://github.com/krishna-shrinivas/2020_Henninger_Oksuz_Shrinivas_RNA_feedback/tree/master/Droplet_analysis) 
+The biomolecular condensate movie-generation workflow was adapted from the methodology provided in [Droplet_analysis](https://github.com/krishna-shrinivas/2020_Henninger_Oksuz_Shrinivas_RNA_feedback/tree/master/Droplet_analysis) , developed by Jonathan E. Henninger  under MIT License.
+Henninger, J. E., Oksuz, O., Shrinivas, K., et al., Cell 184, 207–225 (2021)
 
 If you use this DDFT implementation, please also cite the accompanying DDFT
 publication. The complete citation will be added here once it is available.
