@@ -22,9 +22,9 @@ $$
 \mu = \mu_{\mathrm{RPA+FH}}(\phi)-\kappa\nabla^2\phi,
 $$
 
-where \(\phi\) is the protein monomer density (volume fraction in the default
-mapping), \(\mu_{\mathrm{RPA+FH}}\) is the sequence-dependent bulk chemical
-potential, and \(\kappa\) is the square-gradient or influence parameter. The
+where $\phi is the protein monomer density (volume fraction in the default
+mapping), $\mu_{\mathrm{RPA+FH}}$ is the sequence-dependent bulk chemical
+potential, and $\kappa$ is the square-gradient or influence parameter. The
 main driver uses an adaptive time step and supports zero-flux and Robin-type
 boundary conditions.
 
@@ -138,6 +138,8 @@ The RPA-related routines in `scripts/DDFT/Protein_RPA/` were adapted from
 [Protein_RPA](https://github.com/laphysique/Protein_RPA), developed by Yi-Hsuan
 Lin and Hue Sun Chan under the MIT License. 
 Y.-H. Lin, J. D. Forman-Kay, and H. S. Chan, Phys. Rev. Lett. 117, 178101 (2016)
+
+The biomolecular condensate movie-generation workflow was adapted from the methodology provided in [RNA-mediated feedback](https://github.com/krishna-shrinivas/2020_Henninger_Oksuz_Shrinivas_RNA_feedback) 
 
 If you use this DDFT implementation, please also cite the accompanying DDFT
 publication. The complete citation will be added here once it is available.
