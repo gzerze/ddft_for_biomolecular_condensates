@@ -32,9 +32,6 @@ def lookup_table(FE,u,phis):
     mu_table=np.array(mu_table)
 
 
-    #for i in range(N):
-    #    print(i,phi_table[i],mu_table[i])
-
 
     mu_spl = CubicSpline(phi_table,mu_table)
 
@@ -71,9 +68,6 @@ def dmu_table(FE,u,phis):
         dmu_table.append(FE.d_chem_pot(phi_table[i],phis,u))
     dmu_table=np.array(dmu_table)
 
-
-    #for i in range(N):
-    #    print(i,phi_table[i],dmu_table[i])
 
 
     dmu_spl = CubicSpline(phi_table,dmu_table)
@@ -116,10 +110,6 @@ def lookup_table2(FE,u,phis):
 
 
 
-    #for i in range(N):
-    #    print(i,phi_table[i],mu_table[i])
-
-
     mu1_spl = CloughTocher2DInterpolator(list(zip(phi1_table,phi2_table)),mu1_table)
     mu2_spl = CloughTocher2DInterpolator(list(zip(phi1_table,phi2_table)),mu2_table)
 
@@ -156,9 +146,6 @@ def dmu_table2(FE,u,phis):
             dmu1_table[i,j]=FE.d_chem_pot(phi1_table[i],phis,u)
 
 
-
-    #for i in range(N):
-    #    print(i,phi_table[i],dmu_table[i])
 
     dmu1_spl = CloughTocher2DInterpolator(list(zip(phi1_table,phi2_table)),dmu_table)
 
