@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-Main function that is called to initialize and run DDFT
-This code is the one that works well for non-salt case, this is derived from modifying v3.
+Main driver for initializing and running the Dynamic Density
+Functional Theory (DDFT) simulation.
+
+This implementation is based on version v3 and has been tested
+for systems without salt. The code evolves the density fields
+over time using a coupled numerical solver in FiPy.
 
 """
 
@@ -35,11 +39,24 @@ from initialize import Initialize #imports initialize class written for this cod
 
 def run_DDFT(args):
     """
-    Function that calculate the volume density of monomer at different time steps
-    """
+    Initialize and execute the DDFT simulation.
 
+    The simulation evolves the density fields over time by solving
+    a coupled system of numerical equations. The chemical potential,
+    boundary-condition parameters, and density fields are updated
+    at each time step.
+
+    Parameters
+    ----------
+    args : Command-line arguments containing the input parameter file,
+        output directory, and simulation state directory.
+    """
+    
+
+    # 1. Initialize simulation timing and input parameters
     start = timeit.default_timer()
 
+    # Read simulation parameters from the input configuration file
     input_parameters = input_parse(args.i);
   
 
@@ -50,22 +67,28 @@ def run_DDFT(args):
     steps = 0
     petscwrapper = SerialPETScCommWrapper()
 
-    #    sys.path.insert(0,'/project/zerze/asilalah/software/RPA_ddft3/zero_flux/coalesce-20')
     petscwrapper.Barrier()
 
-    # Initialize the system and Boundary Condition (BC)
+
+    #2. Initialize the simulation system and boundary conditions
+
+    # Initialize the computational mesh, density fields, initial
+    # conditions, and other physical and numerical parameters.
     System=Initialize(args)
-
+    
     petscwrapper.Barrier()
+    
     BC=Boundary(System)
 
     parallelComm.Barrier()
     alpha,beta,coeff_diff,coeff_impl,g,RobinCoeff=BC.parameters()
 
+
+    #3. Configure time integration and output settings
     start = timeit.default_timer()
 
 
-    # Time discretization
+    # Define the simulation time variable used by FiPy
     t = fp.Variable(0.0)
     dt = input_parameters['dt'];
 
@@ -86,7 +109,11 @@ def run_DDFT(args):
     xi_left=np.min(System.xi.globalValue)-0.05
     xi_right=np.max(System.xi.globalValue)+0.05
 
-
+    #4. The main time-integration loop
+    # Continue the simulation while all stopping criteria are satisfied:
+    #     1. The elapsed simulation time has not exceeded the target duration.
+    #     2. The total number of time steps has not been reached.
+    #     3. The time step remains larger than the minimum allowed value.
     while (elapsed <= System.duration) and (steps <= System.total_steps) and (dt>System.dt_min):
         
         if parallelComm.procID == 0:
@@ -96,7 +123,8 @@ def run_DDFT(args):
         start2=timeit.default_timer()
     
         petscwrapper.Barrier()
-        #First we calculate chemical potential, and chemical potential derivative
+
+        # Calculate the chemical potential and its relevant derivatives
         # This is then followed with update/calculation of Boundary Condition parameters
         System.calc_chemical()
         BC.update_parameters(System)
@@ -179,10 +207,10 @@ def run_DDFT(args):
     
 
 if __name__ == "__main__":
-     parser = argparse.ArgumentParser(description='Take output filename to run CH simulations')
-     parser.add_argument('--i',help="Name of input params", required = True);
-     parser.add_argument('--o',help="Name of output folder", required = True);
-     parser.add_argument('--s',help="Name of state folder", required = True);
+     parser = argparse.ArgumentParser(description='Run DDFT simulations using the specified parameters')
+     parser.add_argument('--i',help="Path to the input parameter file", required = True);
+     parser.add_argument('--o',help="Path to the output directory for plots and results", required = True);
+     parser.add_argument('--s',help="Path to the directory for saving simulation states", required = True);
      args = parser.parse_args();
 
      run_DDFT(args);
