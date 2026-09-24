@@ -1,54 +1,113 @@
-#   Initialization parameters
+# ============================================================
+# Initialization and Simulation Settings
+# ============================================================
 
 #   Flag/variable simulation parameters with conditions
 #   plot_flag is for generating images (PNG  format)
+
+# Simulation dimension
 dimension,2
+
+# Output and visualization flags
+# plot_flag  : generate PNG images
+# svg_flag   : generate SVG images
+# circ_flag  : enable circular geometry
 plot_flag,1
 svg_flag,1
 circ_flag,0
 
 
-#   salt concentration
-#   Define size of grid (nx=number of cells per dimension), dx = length of cell
+# ============================================================
+# Grid and Physical Domain
+# ============================================================
+
+# Grid dimensions:
+# nx, ny, nz : number of cells in the x, y, and z directions
+# dx         : grid-cell size
 nx,120
 ny,120
 nz,1
 dx,2.4
 
+# salt concentration
 phis,0.000
 
-#   Noise strength (will be deleted)
+# ============================================================
+# Noise
+# ============================================================
+# Noise strength
+# Set to zero for deterministic simulations.
 noise_strength,0.0
 
-#   Simulation parameters
-#   dt is initial step size
-#   dt_max & min are maximum/minimum step sizes that are allowed
-#   tolerance is the residual below which simulation stops
-#   total_steps/duration are number of simulation steps/time to run (whichever occurs first)
-#   checkpoint is frequency of logging simulation data
+
+# ============================================================
+# Time Integration and Simulation Control
+# ============================================================
+
+# Time-step parameters:
+# dt     : initial time step
+# dt_max : maximum allowed time step
+# dt_min : minimum allowed time step
 dt,1e-2
 dt_max,5e2
 dt_min,1e-5
+
+
+
+# Convergence criterion:
+# The simulation is considered converged when the residual
+# falls below this tolerance.
 tolerance,1e-6
+
+# Simulation stopping criteria:
+# total_steps : maximum number of simulation steps
+# duration    : maximum simulation time
+# The simulation stops when either criterion is reached.
 total_steps,10000
+duration,200000.0
+
+
+# Output and checkpoint frequencies
+# text_log  : frequency of text/log output
+# checkpoint: frequency of checkpoint generation
+# state_save: frequency of saving the simulation state
 text_log,100
 checkpoint,100
-duration,200000.0
 state_save,100
+
+
+# Molecular / Sequence Parameters
+# ============================================================
+
 seq_name1,Ddx4_N1
 seq_name2,FUS_FC
-charge, 1
+charge,1
 
-# Surface tension / influence parameter
+
+# ============================================================
+# Surface Tension and Thermodynamic Parameters
+# ============================================================
+
+# Surface-tension / influence parameter
 kappa,161
+
+# Inverse temperature parameter
 temperature_inverse,4
+
+# pH of the system
 pH,7
 
-#    Florry Huggins Parameters
+
+# ============================================================
+# Flory-Huggins Parameters
+# ============================================================
+
+# Enthalpy and entropy parameters for each component
 enthalpy1,-0.07
 entropy1,-0.3
 enthalpy2,0.1
 entropy2,-0.35
+
 
 #   Number of components
 no_comps,1
@@ -59,12 +118,24 @@ boundary_type,zero_flux
 #diffusive constant at boundary
 h_mul,0.0
 
-#   Dense/Dilute IC Values
+
+# ============================================================
+# Dense and Dilute Phase Initial Conditions
+# ============================================================
+# Initial dense- and dilute-phase volume fractions
 idense,0.1499
 idil,0.00002687
 
-#     Frequency of capturing image
+# ============================================================
+# Image Capture
+# ============================================================
+# Frequency of image capture
 n_capture,100
 
-# Initial density profile (please refer to density_class.py)
+# ============================================================
+# Initial Density Profile
+# ============================================================
+
+# Initial density profile.
+# See density_class.py for available profile definitions.
 initial_density,phi_circle2_7
