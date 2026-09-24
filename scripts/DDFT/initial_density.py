@@ -1,6 +1,13 @@
 import numpy as np
 import matplotlib.pyplot as plt
 
+
+# Define the initial density profiles and normalize them.
+# Inputs:
+#   nx : number of grid points in the x-direction
+#   ny : number of grid points in the y-direction
+# The initial profiles can be modified or extended to match the proposed simulation setup.
+
 def phi_1D(nx,ny):
     phi_value=np.array( [[0.]*ny]*nx )
     mid = int((ny*nx)/2)
