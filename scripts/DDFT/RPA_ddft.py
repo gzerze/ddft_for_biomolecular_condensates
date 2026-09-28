@@ -32,13 +32,13 @@ from fipy import * #finite volume numerical solver package
 import fipy.tools.numerix as npx
 import numpy as np #math operators etc for Python
 import matplotlib.pyplot as plt #plotting and graph functions for Python 
-import argparse #unfamiliar with this, read more, parses input from files to text i think?
+import argparse
 import Protein_RPA.utils.free_energy as f_en
 from Protein_RPA.utils.input_parse import *
 from Protein_RPA.utils.graphics import * #getting code from RPA calculation files from protein
 import initial_density as density #obtaining initial condition files
 from plot_all import * #plotting functions for results
-import chempot_table as chempot #chemical potential as a function of density, learn more
+import chempot_table as chempot #chemical potential as a function of density
 from petsc4py import PETSc #numerical LA solver
 
 #from boundary_condition import *mod
