@@ -1,5 +1,17 @@
 class initial_density:
+"""
+Define the initial density profiles and normalize them.
+Parameters
+----------
+nx : int
+    Number of grid points in the x-direction.
+ny : int
+    Number of grid points in the y-direction.
 
+The initial profiles can be modified or extended to match
+the proposed simulation setup.
+"""
+    
     def __init__(self,nx,ny,idense,idil,nz=0):
     
         import numpy as np
