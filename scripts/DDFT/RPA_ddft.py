@@ -148,6 +148,7 @@ def run_DDFT(args):
         petscwrapper.Barrier()
 
         # COUPLED PDE SYSTEM DISCRETIZATION
+        #The implementation below is done so we can avoid solving the equations using forward euler causing the simulation to either blow up with numerical instability or take weeks to finish.
         # ---------------------------------------------------------------------
         # Equation 0 (Evolution of phi):
         # Solves d(phi)/dt =div(phi * grad(xi)) + Robin_BC_terms (boundary condition)
