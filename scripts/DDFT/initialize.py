@@ -3,7 +3,15 @@ class Initialize:
 
     """
     This class is to call all needed parameters, and to construct components needed 
-    before running DDFT evolution
+    before running DDFT simulation
+        This class:
+        1. Reads the input parameters.
+        2. Constructs the free-energy model.
+        3. Creates the FiPy mesh.
+        4. Creates the FiPy field variables.
+        5. Loads a previous simulation state if available.
+        6. Otherwise, generates the initial density.
+        7. Constructs chemical-potential lookup tables.
     """
 
     def __init__(self,args):
