@@ -3,11 +3,23 @@
 """
 Main driver for initializing and running the Dynamic Density
 Functional Theory (DDFT) simulation.
+Evolves the conserved density field phi(r, t) of a phase-separating polymeric
+or protein system using the FiPy finite-volume framework.
 
-This implementation is based on version v3 and has been tested
-for systems without salt. The code evolves the density fields
-over time using a coupled numerical solver in FiPy.
 
+Numerical Method:
+-----------------
+- Spatial discretization: Cell-centered Finite Volume Method (FiPy).
+- Boundary conditions: Generalized Robin-type boundary condition decomposition.
+- Temporal integration: Implicit Euler with Picard / non-linear residual sweeps.
+- Adaptive time-stepping: Backtracking with dt reduction on slow convergence;
+  optimistic dt expansion upon convergence.
+- Linear backend: PETSc iterative solvers with MPI synchronization.
+
+This module evolves coupled spatial density fields over time using the FiPy 
+finite-volume framework with PETSc-backed linear solvers. Time integration 
+employs an adaptive time-stepping scheme with Picard/non-linear residual sweeps 
+and coupled Robin-type boundary condition updates.
 """
 
 from __future__ import print_function
@@ -48,8 +60,11 @@ def run_DDFT(args):
 
     Parameters
     ----------
-    args : Command-line arguments containing the input parameter file,
-        output directory, and simulation state directory.
+    args : argparse.Namespace
+        Command-line interface arguments containing:
+        - args.i : str, path to input configuration file.
+        - args.o : str, path to directory for generated figures/plots.
+        - args.s : str, path to directory for binary checkpoint files.
     """
     
 
@@ -132,12 +147,30 @@ def run_DDFT(args):
         
         petscwrapper.Barrier()
 
+        # COUPLED PDE SYSTEM DISCRETIZATION
+        # ---------------------------------------------------------------------
+        # Equation 0 (Evolution of phi):
+        # Solves d(phi)/dt =div(phi * grad(xi)) + Robin_BC_terms (boundary condition)
+        # Implemented using a convective term with face-gradient velocity field grad(xi).
+
+        # Equation 1 ( Equation for xi):
+        # FiPy discretization & Linearization:
+        # - LHS ImplicitSourceTerm(1.0, xi): Solves for xi as an implicit unknown
+        # - RHS Linearized mu_local(phi): Taylor expansion around (phi_now, xi_now):
+        #     mu_local(phi) ≈ xi_now + (dxi/dphi)_now * (phi - phi_now)
+        #   Represented by an implicit coupling term for phi:
+        #     + ImplicitSourceTerm(coeff=dxi_now, var=phi)
+        #   and explicit load vector contributions:
+        #     + xi_now - dxi_now * phi_now
+        # - RHS -DiffusionTerm(kappa, phi): FiPy defines DiffusionTerm(G, u) as
+        #   div(G * grad(u)). With the leading minus sign, this represents
+        #   -div(kappa * grad(phi)) = -kappa * laplacian(phi).
+        
         #Convection Equation with Convection BC:
         eqn0=fp.TransientTerm(coeff=1.0,var=System.phi)==fp.ConvectionTerm(coeff=System.xi.faceGrad,var=System.phi) +alpha*(BC.RobinCoeff * g * coeff_diff).divergence + beta*fp.ImplicitSourceTerm(coeff=(BC.RobinCoeff * coeff_impl).divergence,var=System.phi)
         eqn1=fp.ImplicitSourceTerm(coeff=1.0,var=System.xi)== System.xi_now + fp.ImplicitSourceTerm(coeff=System.dxi_now,var=System.phi) -System.dxi_now*System.phi_now -fp.DiffusionTerm(coeff=System.kappa,var=System.phi) 
 
-
-        #eqn is defined as both equations 
+        # Couple both PDEs into a single non-linear block system
         eqn=eqn0 & eqn1
 
 
