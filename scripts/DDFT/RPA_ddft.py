@@ -27,7 +27,6 @@ import fipy as fp
 import os
 import sys
 
-#sys.path.insert(0,'/project/zerze/asilalah/software/RPA_ddft3/zero_flux/coalesce-20')
 from fipy import * #finite volume numerical solver package
 import fipy.tools.numerix as npx
 import numpy as np #math operators etc for Python
@@ -41,7 +40,6 @@ from plot_all import * #plotting functions for results
 import chempot_table as chempot #chemical potential as a function of density
 from petsc4py import PETSc #numerical LA solver
 
-#from boundary_condition import *mod
 import timeit #python module to measure execution time
 import subprocess #run child processes, error catching and handling, etc from this module
 from Protein_RPA import seq_list as sl #sequence charge calculations from protein (?)
