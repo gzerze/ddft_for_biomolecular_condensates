@@ -10,24 +10,31 @@ import fipy as fp
 from os import listdir
 from os.path import join, isfile
 
-#def plot_densitylog_2D(mesh,phi,t,steps,output_dir):
-#	fig,ax=plt.subplots()
-#	cs = ax.contourf(mesh.x.globalValue,mesh.y.globalValue,gv.r_res*phi.globalValue,cmap=cm.get_cmap("Blues"),levels=np.linspace(0,0.2,256),locator=ticker.LogLocator())	
-#	fig.colorbar(cs)
-#	ax.legend(title=str(int(t)))
- #   ax.set_xlabel('y')
-#	ax.set_ylabel('x')
-#	plt.title("Volume fraction")
-#	fig.savefig(fname=output_dir+'Plog_step_{step}.png'.format(step=steps),dpi=300,format='png')
+"""
+Plot the spatial state of the condensate from saved simulation data.
+
+For each saved state, this module generates:
+    1. A 2D density map of the condensate.
+    2. A 1D density profile.
+    3. A 2D distribution of the chemical potential.
+
+The simulation state files are expected to contain the simulation step,
+time, input parameters, density field, and chemical potential field.
+"""
 
 
 def read_state(args):
+    # Define input and output paths from the command-line arguments.
     input_state=args.s
     output_dir=args.o
     input_param=args.i
 
+    # Read the simulation parameters required to reconstruct the spatial mesh.
     input_parameters = input_parse(args.i);
 
+
+    # Construct the 2D simulation mesh using the spatial resolution
+    # and number of grid points specified in the input parameters.
     nx = int(input_parameters['nx'])
     ny = int(input_parameters['ny'])
     dx = input_parameters['dx']
@@ -41,6 +48,8 @@ def read_state(args):
 
     phi_range=[0,0.25]
     xi_range=[-2,2]
+    # Create FiPy cell variables that will be populated with the
+    # density and chemical potential fields from each saved state.
     phi=fp.CellVariable(mesh=mesh, name=r'$\phi_{monomer}$')
     xi = fp.CellVariable(mesh=mesh)
     print(listdir(input_state))
@@ -56,7 +65,8 @@ def read_state(args):
         phi.setValue(phi_value.flatten())
         xi.setValue(xi_value.flatten())
 
-        #plot_densitylog_2D(mesh,phi,t,steps,output_dir)
+        # Generate the 2D density map, 1D density profile, and
+        # chemical potential distribution for the current state.
         plot_density_2D(mesh,phi,t,steps,output_dir,phi_range)
         plot_density_1D(mesh,phi_value,t,steps,output_dir,phi_range)
         plot_chempotential(mesh,xi,t,steps,output_dir,xi_range)
