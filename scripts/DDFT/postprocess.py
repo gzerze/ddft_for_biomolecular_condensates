@@ -3,6 +3,16 @@ import numpy as np
 import Protein_RPA.utils.global_vars as gv
 from matplotlib import ticker
 
+"""
+Plotting utilities for visualizing simulation results.
+
+This module contains functions for generating 2D and 1D plots of the
+simulated volume fraction and chemical potential. The functions use
+the simulation mesh and field variables stored in the System object
+and save the resulting figures to the output directory.
+"""
+
+
 def plot_densitylog_2D(mesh,phi,t,steps,output_dir):
 	fig, ax  =plt.subplots()
 	cs = ax.tricontourf(mesh.x.globalValue,mesh.y.globalValue,gv.r_res*phi.globalValue,cmap=plt.cm.get_cmap("Blues"),levels=np.linspace(0.001,0.2,256),locator=ticker.LogLocator())	
