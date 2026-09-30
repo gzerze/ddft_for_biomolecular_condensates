@@ -2,6 +2,17 @@ import matplotlib.pyplot as plt
 import numpy as np
 import Protein_RPA.utils.global_vars as gv
 
+"""
+Plotting utilities for visualizing simulation results.
+
+This module contains functions for generating 2D and 1D plots of the
+simulated volume fraction and chemical potential. The functions use
+the simulation mesh and field variables stored in the System object
+and save the resulting figures to the output directory.
+"""
+
+
+
 def plot_density_2D(System,t,n_capture,steps,output_dir):
 	"""
     Plot the 2D volume fraction of the system.
@@ -70,7 +81,7 @@ def plot_density_1Ds(System,t,n_capture,steps,output_dir):
     This function assumes that System.mesh.x.globalValue and
     System.phi_value are already arranged consistently for plotting.
     """
-	#phi_value=System.phi.globalValue.reshape(nx,ny)
+	
 	fig, ax  =plt.subplots()
 	xp=System.mesh.x.globalValue.reshape(System.nx,System.ny)
 	ax.plot(xp,gv.r_res*System.phi_value)
